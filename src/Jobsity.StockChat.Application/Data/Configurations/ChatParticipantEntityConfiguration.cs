@@ -15,6 +15,8 @@ namespace Jobsity.StockChat.Application.Data.Configurations
             builder.Property(t => t.Stock).IsStock();
             builder.Property(t => t.Nickname).IsNickname();
 
+            builder.HasPartitionKey(t => t.Stock);
+
             builder.HasOne(t => t.Chat).WithMany(d => d.Participants).HasForeignKey(t => t.Stock);
             builder.HasOne(t => t.Participant).WithMany(d => d.Participations).HasForeignKey(t => t.Nickname);
         }

@@ -4,9 +4,9 @@ using System.Text;
 
 namespace Jobsity.StockChat.Application.Events
 {
-    public class ChatCreatedEvent : ChatEventBase
+    public class ChatCreatedEvent : ChatMessageSentEvent
     {
-        public ChatCreatedEvent(string stock) : base(stock)
+        public ChatCreatedEvent(string nickname, string stock) : base($"'{stock}' created", nickname, stock)
         {
         }
     }

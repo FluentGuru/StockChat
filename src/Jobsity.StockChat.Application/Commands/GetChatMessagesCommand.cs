@@ -1,4 +1,5 @@
-﻿using Jobsity.StockChat.Domain.Types;
+﻿using Jobsity.StockChat.Application.Constants;
+using Jobsity.StockChat.Domain.Types;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -8,8 +9,11 @@ namespace Jobsity.StockChat.Application.Commands
 {
     public class GetChatMessagesCommand : ChatCommandBase, IRequest<IEnumerable<ChatMessage>>
     {
-        public GetChatMessagesCommand(string stock) : base(stock)
+        public GetChatMessagesCommand(string stock, int count = ChatConstants.FetchMessagesCount) : base(stock)
         {
+            Count = count;
         }
+
+        public int Count { get; }
     }
 }

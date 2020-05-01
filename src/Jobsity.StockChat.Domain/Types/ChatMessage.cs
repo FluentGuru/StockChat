@@ -11,8 +11,8 @@ namespace Jobsity.StockChat.Domain.Types
 
         public string FromNickName { get; set; }
 
-        public MessageTypes Type { get; set; }
-
         public string Message { get; set; }
+
+        public DateTime SentTime { get; set; }
     }
 }
