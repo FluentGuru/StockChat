@@ -11,6 +11,7 @@ namespace Jobsity.StockChat.Application.Entities
         {
             Participations = new List<ChatParticipantEntity>();
             Messages = new List<ChatMessageEntity>();
+            UserTokens = new List<UserTokenEntity>();
         }
 
         public string PasswordHash { get; set; }
@@ -20,5 +21,7 @@ namespace Jobsity.StockChat.Application.Entities
         public virtual ICollection<ChatParticipantEntity> Participations { get; set; }
 
         public virtual ICollection<ChatMessageEntity> Messages { get; set; }
+
+        public virtual ICollection<UserTokenEntity> UserTokens { get; set; }
     }
 }

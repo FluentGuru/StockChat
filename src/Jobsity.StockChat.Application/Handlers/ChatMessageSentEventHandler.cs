@@ -24,7 +24,7 @@ namespace Jobsity.StockChat.Application.Handlers
 
         public async Task Handle(ChatMessageSentEvent notification, CancellationToken cancellationToken)
         {
-            var message = new ChatMessageEntity() { Stock = notification.Stock, FromNickName = notification.Nickname, Message = notification.Message, SentTime = dateTime.Now });
+            var message = new ChatMessageEntity() { Stock = notification.Stock, FromNickName = notification.Nickname, Message = notification.Message, SentTime = dateTime.Now };
             await dbContext.AddAsync(message, cancellationToken);
             await dbContext.SaveChangesAsync(cancellationToken);
         }

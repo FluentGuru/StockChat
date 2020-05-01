@@ -22,6 +22,8 @@ namespace Jobsity.StockChat.Application.Data
 
         public virtual DbSet<UserEntity> Users { get; set; }
 
+        public virtual DbSet<UserTokenEntity> UserTokens { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -29,6 +31,7 @@ namespace Jobsity.StockChat.Application.Data
             modelBuilder.ApplyConfiguration(new ChatMessageEntityConfiguration());
             modelBuilder.ApplyConfiguration(new ChatParticipantEntityConfiguration());
             modelBuilder.ApplyConfiguration(new UserEntityConfiguration());
+            modelBuilder.ApplyConfiguration(new UserTokenEntityConfiguration());
         }
     }
 }

@@ -1,5 +1,4 @@
-﻿using Jobsity.StockChat.Domain.Constants;
-using Jobsity.StockChat.Domain.Types;
+﻿using Jobsity.StockChat.Domain.Types;
 using System;
 using System.Collections.Generic;
 using System.Text;
