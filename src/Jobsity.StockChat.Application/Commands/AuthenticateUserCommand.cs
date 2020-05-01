@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Jobsity.StockChat.Application.Commands
 {
-    public class AuthenticateUserCommand : IRequest<string>
+    public class AuthenticateUserCommand : IRequest<UserAuthentication>
     {
         public AuthenticateUserCommand(string nickname, string password, TimeSpan tokenExpirationTime)
         {

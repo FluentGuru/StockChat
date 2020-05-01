@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace Jobsity.StockChat.Application.Handlers
 {
-    public class AuthenticateUserCommandHandler : IRequestHandler<AuthenticateUserCommand, string>
+    public class AuthenticateUserCommandHandler : IRequestHandler<AuthenticateUserCommand, UserAuthentication>
     {
         private readonly StockChatDbContext dbContext;
         private readonly IHasher hasher;
@@ -26,7 +26,7 @@ namespace Jobsity.StockChat.Application.Handlers
             this.dateTime = dateTime;
         }
 
-        public async Task<string> Handle(AuthenticateUserCommand request, CancellationToken cancellationToken)
+        public async Task<UserAuthentication> Handle(AuthenticateUserCommand request, CancellationToken cancellationToken)
         {
             var user = await dbContext.GetUser(request.Nickname, cancellationToken);
             var hash = hasher.Generate(request.Password, user.PasswordSalt);
@@ -38,7 +38,7 @@ namespace Jobsity.StockChat.Application.Handlers
                 var token = new UserToken() { Token = hasher.Generate(user.LastLoginDate.ToString(), request.Nickname), CreatedDate = user.LastLoginDate, ExpirationDate = user.LastLoginDate.Add(request.TokenExpirationTime) };
                 await dbContext.AddAsync(token);
                 await dbContext.SaveChangesAsync(cancellationToken);
-                return token.Token;
+                return new UserAuthentication() { User = user, Token = token.Token };
             }
 
             throw new UserAuthenticationFailedException($"incorrect password");
