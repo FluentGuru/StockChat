@@ -13,6 +13,6 @@ namespace Jobsity.StockChat.Domain.Types
 
         public MessageTypes Type { get; set; }
 
-        public string Content { get; set; }
+        public string Message { get; set; }
     }
 }

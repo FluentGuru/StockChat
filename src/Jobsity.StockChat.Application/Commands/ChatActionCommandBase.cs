@@ -10,10 +10,8 @@ namespace Jobsity.StockChat.Application.Commands
         public ChatActionCommandBase(string nickname, string stock) : base(stock)
         {
             Nickname = nickname;
-            Stock = stock;
         }
 
         public string Nickname { get; }
-        public string Stock { get; }
     }
 }

@@ -7,5 +7,7 @@ namespace Jobsity.StockChat.Domain.Services
     public interface IHasher
     {
         string Generate(string source, string salt);
+
+        string GetSalt(int length);
     }
 }

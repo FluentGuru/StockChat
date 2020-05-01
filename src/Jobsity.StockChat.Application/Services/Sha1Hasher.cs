@@ -16,5 +16,17 @@ namespace Jobsity.StockChat.Application.Services
                 return Convert.ToBase64String(hash);
             }
         }
+
+        public string GetSalt(int length)
+        {
+            var salt = "";
+            var random = new Random();
+            for(int i = 0; i < length; i++)
+            {
+                salt += (char)random.Next(64, 90);
+            }
+
+            return salt;
+        }
     }
 }

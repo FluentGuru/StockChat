@@ -14,6 +14,8 @@ namespace Jobsity.StockChat.Application.Entities
             Sender = new UserEntity();
         }
 
+        public int Id { get; set; }
+
         public virtual ChatEntity Chat { get; set; }
 
         public virtual UserEntity Sender { get; set; }

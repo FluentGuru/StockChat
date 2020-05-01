@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Jobsity.StockChat.Application.Events
 {
-    public class ChatEventBase : INotification
+    public abstract class ChatEventBase : INotification
     {
         public ChatEventBase(string stock)
         {
