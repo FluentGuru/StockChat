@@ -15,6 +15,8 @@ namespace Jobsity.StockChat.Application.Data.Configurations
             builder.HasKey(t => t.Nickname);
             builder.Property(t => t.Nickname).IsNickname();
 
+            //builder.HasPartitionKey(t => t.CreatedDate.Year);
+
             builder.Property(t => t.CreatedDate).IsRequired().ValueGeneratedOnAdd();
             builder.Property(t => t.LastLoginDate).IsRequired().ValueGeneratedOnAdd();
             builder.Property(t => t.PasswordHash).IsRequired();

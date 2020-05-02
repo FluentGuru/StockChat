@@ -16,9 +16,9 @@ namespace Jobsity.StockChat.Application
         public static void AddApplication(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddServices();
-            services.AddContext(
-                configuration.GetValue<string>("Endpoint"), 
-                configuration.GetValue<string>("Subscription"));
+            //services.AddContext(
+            //    configuration.GetValue<string>("Endpoint"), 
+            //    configuration.GetValue<string>("Subscription"));
             services.AddMediator();
         }
 

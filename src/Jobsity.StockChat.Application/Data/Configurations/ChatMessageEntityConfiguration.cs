@@ -14,7 +14,7 @@ namespace Jobsity.StockChat.Application.Data.Configurations
             builder.HasKey(t => t.Id);
             builder.Property(t => t.Id).IsRequired().ValueGeneratedOnAdd();
 
-            builder.HasPartitionKey(t => t.Stock);
+            //builder.HasPartitionKey(t => t.Stock);
 
             builder.Property(t => t.Stock).IsStock();
             builder.Property(t => t.FromNickName).IsNickname();
