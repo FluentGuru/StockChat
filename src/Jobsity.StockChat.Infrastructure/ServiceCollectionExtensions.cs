@@ -33,7 +33,7 @@ namespace Jobsity.StockChat.Infrastructure
 
         public static void AddContext(this IServiceCollection services, string endpoint, string subscription)
         {
-            services.AddDbContextPool<StockChatDbContext>(options => options.UseCosmos(endpoint, subscription, "StockChat"));
+            services.AddDbContext<StockChatDbContext>(options => options.UseCosmos(endpoint, subscription, "StockChat"));
         }
 
     }
