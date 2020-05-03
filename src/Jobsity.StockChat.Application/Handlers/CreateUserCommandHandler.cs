@@ -1,29 +1,25 @@
 ﻿using Jobsity.StockChat.Application.Commands;
-using Jobsity.StockChat.Application.Constants;
-using Jobsity.StockChat.Application.Data;
-using Jobsity.StockChat.Application.Entities;
-using Jobsity.StockChat.Domain.Exceptions;
+using Jobsity.StockChat.Domain.Constants;
 using Jobsity.StockChat.Domain.Services;
 using Jobsity.StockChat.Domain.Types;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Jobsity.StockChat.Domain.Entities;
+using Jobsity.StockChat.Domain.Exceptions;
 
 namespace Jobsity.StockChat.Application.Handlers
 {
     internal class CreateUserCommandHandler : IRequestHandler<CreateUserCommand, User>
     {
-        private readonly StockChatDbContext dbContext;
+        private readonly IUnitOfWork unitOfWork;
         private readonly IDateTime dateTime;
         private readonly IHasher hasher;
 
-        public CreateUserCommandHandler(StockChatDbContext dbContext, IDateTime dateTime, IHasher hasher)
+        public CreateUserCommandHandler(IUnitOfWork unitOfWork, IDateTime dateTime, IHasher hasher)
         {
-            this.dbContext = dbContext;
+            this.unitOfWork = unitOfWork;
             this.dateTime = dateTime;
             this.hasher = hasher;
         }
@@ -32,14 +28,13 @@ namespace Jobsity.StockChat.Application.Handlers
         {
             try
             {
-                var user = await dbContext.Users.FirstOrDefaultAsync(u => u.Nickname == request.Nickname, cancellationToken);
+                var user = await unitOfWork.GetSingleAsync<UserEntity>(u => u.Nickname == request.Nickname);
                 if (user == null)
                 {
                     user = new UserEntity() { Nickname = request.Nickname, CreatedDate = dateTime.Now, LastLoginDate = DateTime.Now };
                     user.PasswordSalt = hasher.GetSalt(UserAuthConstants.PasswordSaltLength);
                     user.PasswordHash = hasher.Generate(request.Password, user.PasswordSalt);
-                    await dbContext.AddAsync(user, cancellationToken);
-                    await dbContext.SaveChangesAsync(cancellationToken);
+                    await unitOfWork.AddAndSaveAsync(user);
                     return user;
                 }
 

@@ -14,6 +14,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Jobsity.StockChat.Application\Jobsity.StockChat.Application.csproj" />
     <ProjectReference Include="..\Jobsity.StockChat.Domain\Jobsity.StockChat.Domain.csproj" />
+    <ProjectReference Include="..\Jobsity.StockChat.Infrastructure\Jobsity.StockChat.Infrastructure.csproj" />
   </ItemGroup>
 
 

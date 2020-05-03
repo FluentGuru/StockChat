@@ -1,11 +1,9 @@
 ﻿using Jobsity.StockChat.Application.Commands;
-using Jobsity.StockChat.Application.Data;
+using Jobsity.StockChat.Domain.Entities;
 using Jobsity.StockChat.Domain.Exceptions;
+using Jobsity.StockChat.Domain.Services;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -13,21 +11,20 @@ namespace Jobsity.StockChat.Application.Handlers
 {
     public class EndAuthorizationCommandHandler : IRequestHandler<EndAuthorizationCommand>
     {
-        private readonly StockChatDbContext dbContext;
+        private readonly IUnitOfWork unitOfWork;
 
-        public EndAuthorizationCommandHandler(StockChatDbContext dbContext)
+        public EndAuthorizationCommandHandler(IUnitOfWork unitOfWork)
         {
-            this.dbContext = dbContext;
+            this.unitOfWork = unitOfWork;
         }
 
         public async Task<Unit> Handle(EndAuthorizationCommand request, CancellationToken cancellationToken)
         {
-            var token = await dbContext.UserTokens.FirstAsync(t => t.Token == request.Token, cancellationToken);
+            var token = await unitOfWork.GetSingleAsync<UserTokenEntity>(t => t.Token == request.Token);
             if(token != null)
             {
                 token.ExpirationDate = DateTime.MinValue;
-                dbContext.Update(token);
-                await dbContext.SaveChangesAsync(cancellationToken);
+                await unitOfWork.UpdateAndSaveAsync(token);
                 return Unit.Value;
             }
 

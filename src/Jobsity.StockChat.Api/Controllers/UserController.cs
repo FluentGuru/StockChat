@@ -1,7 +1,7 @@
 ﻿using Jobsity.StockChat.Api.Constants;
 using Jobsity.StockChat.Api.Filters;
 using Jobsity.StockChat.Application.Commands;
-using Jobsity.StockChat.Application.Constants;
+using Jobsity.StockChat.Domain.Constants;
 using Jobsity.StockChat.Domain.Exceptions;
 using Jobsity.StockChat.Domain.Types;
 using MediatR;
@@ -42,11 +42,11 @@ namespace Jobsity.StockChat.Api.Controllers
 
         [HttpPost]
         [Route("auth")]
-        public async Task<ActionResult<UserAuthentication>> SignIn([FromBody]string nickname, [FromBody]string password)
+        public async Task<ActionResult<UserAuthentication>> SignIn([FromBody]UserCredentials request)
         {
             try
             {
-                return await AuthenticateUser(nickname, password);
+                return await AuthenticateUser(request.Nickname, request.Password);
             }
             catch (UserAuthenticationFailedException)
             {
@@ -73,12 +73,12 @@ namespace Jobsity.StockChat.Api.Controllers
 
         [HttpPost]
         [Route("")]
-        public async Task<ActionResult<UserAuthentication>> CreateUser([FromBody]string nickname, [FromBody]string password)
+        public async Task<ActionResult<UserAuthentication>> CreateUser([FromBody]UserCredentials request)
         {
             try
             {
-                await mediator.Send(new CreateUserCommand(nickname, password));
-                return await AuthenticateUser(nickname, password);
+                await mediator.Send(new CreateUserCommand(request.Nickname, request.Password));
+                return await AuthenticateUser(request.Nickname, request.Password);
             }
             catch (UserAuthenticationFailedException)
             {

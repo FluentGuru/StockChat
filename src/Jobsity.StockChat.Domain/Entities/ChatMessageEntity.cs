@@ -3,9 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Jobsity.StockChat.Application.Entities
+namespace Jobsity.StockChat.Domain.Entities
 {
-    public class ChatMessageEntity : ChatMessage
+    public class ChatMessageEntity : ChatMessage, IEntity
     {
         public ChatMessageEntity()
         {

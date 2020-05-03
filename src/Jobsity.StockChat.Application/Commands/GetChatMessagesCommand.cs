@@ -1,4 +1,4 @@
-﻿using Jobsity.StockChat.Application.Constants;
+﻿using Jobsity.StockChat.Domain.Constants;
 using Jobsity.StockChat.Domain.Types;
 using MediatR;
 using System;

@@ -1,11 +1,7 @@
-﻿using Jobsity.StockChat.Application.Data;
-using Jobsity.StockChat.Application.Entities;
-using Jobsity.StockChat.Application.Events;
+﻿using Jobsity.StockChat.Application.Events;
+using Jobsity.StockChat.Domain.Entities;
 using Jobsity.StockChat.Domain.Services;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -13,20 +9,19 @@ namespace Jobsity.StockChat.Application.Handlers
 {
     public class ChatMessageSentEventHandler : INotificationHandler<ChatMessageSentEvent>
     {
-        private readonly StockChatDbContext dbContext;
+        private readonly IUnitOfWork unitOfWork;
         private readonly IDateTime dateTime;
 
-        public ChatMessageSentEventHandler(StockChatDbContext dbContext, IDateTime dateTime)
+        public ChatMessageSentEventHandler(IUnitOfWork unitOfWork, IDateTime dateTime)
         {
-            this.dbContext = dbContext;
+            this.unitOfWork = unitOfWork;
             this.dateTime = dateTime;
         }
 
         public async Task Handle(ChatMessageSentEvent notification, CancellationToken cancellationToken)
         {
             var message = new ChatMessageEntity() { Stock = notification.Stock, FromNickName = notification.Nickname, Message = notification.Message, SentTime = dateTime.Now };
-            await dbContext.AddAsync(message, cancellationToken);
-            await dbContext.SaveChangesAsync(cancellationToken);
+            await unitOfWork.AddAndSaveAsync(message);
         }
     }
 }

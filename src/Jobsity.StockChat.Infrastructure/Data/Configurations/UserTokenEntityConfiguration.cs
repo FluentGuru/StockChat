@@ -1,11 +1,11 @@
-﻿using Jobsity.StockChat.Application.Entities;
+﻿using Jobsity.StockChat.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Jobsity.StockChat.Application.Data.Configurations
+namespace Jobsity.StockChat.Infrastructure.Data.Configurations
 {
     internal class UserTokenEntityConfiguration : IEntityTypeConfiguration<UserTokenEntity>
     {

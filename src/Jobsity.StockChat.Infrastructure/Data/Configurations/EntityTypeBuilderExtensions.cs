@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Jobsity.StockChat.Application.Data.Configurations
+namespace Jobsity.StockChat.Infrastructure.Data.Configurations
 {
     internal static class EntityTypeBuilderExtensions
     {

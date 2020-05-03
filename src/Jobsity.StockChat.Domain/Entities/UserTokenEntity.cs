@@ -3,9 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Jobsity.StockChat.Application.Entities
+namespace Jobsity.StockChat.Domain.Entities
 {
-    public class UserTokenEntity : UserToken
+    public class UserTokenEntity : UserToken, IEntity
     {
         public UserTokenEntity() 
         {

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Jobsity.StockChat.Application.Constants
+namespace Jobsity.StockChat.Domain.Constants
 {
     public class ChatConstants 
     {
