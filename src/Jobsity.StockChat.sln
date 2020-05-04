@@ -3,13 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29521.150
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jobsity.StockChat.Domain", "Jobsity.StockChat.Domain\Jobsity.StockChat.Domain.csproj", "{A5210D3E-DF02-4666-8E72-D22F150403D2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jobsity.StockChat.Domain", "Jobsity.StockChat.Domain\Jobsity.StockChat.Domain.csproj", "{A5210D3E-DF02-4666-8E72-D22F150403D2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jobsity.StockChat.Application", "Jobsity.StockChat.Application\Jobsity.StockChat.Application.csproj", "{6EFDF543-FB0E-46C8-A877-CCF3F10F0364}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jobsity.StockChat.Application", "Jobsity.StockChat.Application\Jobsity.StockChat.Application.csproj", "{6EFDF543-FB0E-46C8-A877-CCF3F10F0364}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jobsity.StockChat.Api", "Jobsity.StockChat.Api\Jobsity.StockChat.Api.csproj", "{430C6D12-9DEA-4A0D-A386-5EB19F938CC8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jobsity.StockChat.Api", "Jobsity.StockChat.Api\Jobsity.StockChat.Api.csproj", "{430C6D12-9DEA-4A0D-A386-5EB19F938CC8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jobsity.StockChat.Infrastructure", "Jobsity.StockChat.Infrastructure\Jobsity.StockChat.Infrastructure.csproj", "{14D9241F-6907-4A5F-BF89-1D5ECD1E5EE9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jobsity.StockChat.Infrastructure", "Jobsity.StockChat.Infrastructure\Jobsity.StockChat.Infrastructure.csproj", "{14D9241F-6907-4A5F-BF89-1D5ECD1E5EE9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jobsity.StockChat.Client", "Jobsity.StockChat.Client\Jobsity.StockChat.Client.csproj", "{775E10F3-7A30-44B3-AAA3-1F72538DC06E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{14D9241F-6907-4A5F-BF89-1D5ECD1E5EE9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{14D9241F-6907-4A5F-BF89-1D5ECD1E5EE9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{14D9241F-6907-4A5F-BF89-1D5ECD1E5EE9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{775E10F3-7A30-44B3-AAA3-1F72538DC06E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{775E10F3-7A30-44B3-AAA3-1F72538DC06E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{775E10F3-7A30-44B3-AAA3-1F72538DC06E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{775E10F3-7A30-44B3-AAA3-1F72538DC06E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

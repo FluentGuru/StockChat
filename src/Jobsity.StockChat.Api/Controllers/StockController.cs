@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 namespace Jobsity.StockChat.Api.Controllers
 {
     [ApiController]
-    [Route("/api/stocks/{stock}")]
+    [Route("/api/stocks")]
     public class StockController : Controller
     {
         private readonly IMediator mediator;
@@ -25,6 +25,14 @@ namespace Jobsity.StockChat.Api.Controllers
         [HttpGet]
         [StockAuthorize]
         [Route("")]
+        public async Task<ActionResult<IEnumerable<Chat>>> GetAllChats()
+        {
+            return Ok(await mediator.Send(new GetAllChatsCommand()));
+        }
+
+        [HttpGet]
+        [StockAuthorize]
+        [Route("{stock}")]
         public async Task<ActionResult<Chat>> JoinChat([FromRoute]string stock, [FromHeader]string nickname)
         {
             return (Chat)await mediator.Send(new JoinChatCommand(nickname, stock));
@@ -32,7 +40,7 @@ namespace Jobsity.StockChat.Api.Controllers
 
         [HttpGet]
         [StockAuthorize]
-        [Route("messages")]
+        [Route("{stock}/messages")]
         public async Task<ActionResult<IEnumerable<ChatMessage>>> GetMessages([FromRoute]string stock)
         {
             return (await mediator.Send(new GetChatMessagesCommand(stock, ChatConstants.FetchMessagesCount))) as ActionResult<IEnumerable<ChatMessage>>;
@@ -40,7 +48,7 @@ namespace Jobsity.StockChat.Api.Controllers
 
         [HttpPost]
         [StockAuthorize]
-        [Route("messages")]
+        [Route("{stock}/messages")]
         public async Task<ActionResult> SendMessage([FromRoute]string stock, [FromHeader]string nickname, [FromBody] string message)
         {
             await mediator.Send(new SendMessageCommand(message, nickname, stock));
@@ -49,7 +57,7 @@ namespace Jobsity.StockChat.Api.Controllers
 
         [HttpGet]
         [StockAuthorize]
-        [Route("participants")]
+        [Route("{stock}/participants")]
         public async Task<ActionResult<IEnumerable<ChatParticipant>>> GetParticipants([FromRoute] string stock)
         {
             return (await mediator.Send(new GetChatParticipantsCommand(stock))) as ActionResult<IEnumerable<ChatParticipant>>;
