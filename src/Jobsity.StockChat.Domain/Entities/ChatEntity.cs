@@ -9,7 +9,6 @@ namespace Jobsity.StockChat.Domain.Entities
     {
         public ChatEntity()
         {
-            Owner = new UserEntity();
             Participants = new List<ChatParticipantEntity>();
             Messages = new List<ChatMessageEntity>();
         }

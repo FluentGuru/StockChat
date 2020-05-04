@@ -5,6 +5,7 @@ using Jobsity.StockChat.Domain.Exceptions;
 using Jobsity.StockChat.Domain.Services;
 using Jobsity.StockChat.Domain.Types;
 using MediatR;
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 

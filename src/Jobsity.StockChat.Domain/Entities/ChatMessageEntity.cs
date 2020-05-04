@@ -9,8 +9,6 @@ namespace Jobsity.StockChat.Domain.Entities
     {
         public ChatMessageEntity()
         {
-            Chat = new ChatEntity();
-            Sender = new UserEntity();
         }
 
         public int Id { get; set; }

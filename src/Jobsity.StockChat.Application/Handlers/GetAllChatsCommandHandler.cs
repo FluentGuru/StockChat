@@ -5,6 +5,7 @@ using Jobsity.StockChat.Domain.Types;
 using MediatR;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -22,7 +23,7 @@ namespace Jobsity.StockChat.Application.Handlers
 
         public Task<IEnumerable<Chat>> Handle(GetAllChatsCommand request, CancellationToken cancellationToken)
         {
-            return dataSource.FetchAsync<ChatEntity, Chat>(chats => chats);
+            return dataSource.FetchAsync<ChatEntity, Chat>(chats => chats.OrderBy(c => c.Stock));
         }
     }
 }

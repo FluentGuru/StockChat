@@ -26,9 +26,9 @@ namespace Jobsity.StockChat.Infrastructure.Services
             return dbContext.SaveChangesAsync();
         }
 
-        public Task AddAsync<T>(T entity) where T : class, IEntity, new()
+        public Task AddAsync<T>(params T[] entity) where T : class, IEntity, new()
         {
-            return dbContext.AddAsync(entity).AsTask();
+            return dbContext.AddRangeAsync(entity);
         }
 
         public async Task<IEnumerable<R>> FetchAsync<T, R>(Func<IQueryable<T>, IQueryable<R>> query)

@@ -25,7 +25,7 @@ namespace Jobsity.StockChat.Application.Handlers
         public async Task<Chat> Handle(JoinChatCommand request, CancellationToken cancellationToken)
         {
             var chat = await unitOfWork.GetSingleAsync<ChatEntity>(c => c.Stock == request.Stock);
-            if(chat != null)
+            if(chat == null)
             {
                 chat = new ChatEntity() { Stock = request.Stock, OwnerNickname = request.Nickname, CreateDate = dateTime.Now };
                 await unitOfWork.AddAndSaveAsync(chat);

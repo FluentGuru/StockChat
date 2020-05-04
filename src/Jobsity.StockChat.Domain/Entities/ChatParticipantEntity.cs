@@ -9,8 +9,6 @@ namespace Jobsity.StockChat.Domain.Entities
     {
         public ChatParticipantEntity()
         {
-            Chat = new ChatEntity();
-            Participant = new UserEntity();
         }
 
         public virtual ChatEntity Chat { get; set; }
