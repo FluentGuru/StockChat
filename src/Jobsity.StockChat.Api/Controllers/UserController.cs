@@ -31,6 +31,7 @@ namespace Jobsity.StockChat.Api.Controllers
         [Route("{nickname}")]
         public async Task<ActionResult<User>> GetUser([FromRoute]string nickname)
         {
+            
             var user = await mediator.Send(new GetUserCommand(nickname));
             if(user != null)
             {

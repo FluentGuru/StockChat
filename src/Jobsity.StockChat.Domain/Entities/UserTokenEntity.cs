@@ -9,7 +9,6 @@ namespace Jobsity.StockChat.Domain.Entities
     {
         public UserTokenEntity() 
         {
-            User = new UserEntity();
         }
 
         public virtual UserEntity User { get; set; }

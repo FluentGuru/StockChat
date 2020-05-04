@@ -8,6 +8,7 @@ namespace Jobsity.StockChat.Infrastructure.Data
     {
         public StockChatDbContext(DbContextOptions<StockChatDbContext> options) : base(options)
         {
+            Database.EnsureCreated();
         }
 
         public virtual DbSet<ChatEntity> Chats { get; set; }

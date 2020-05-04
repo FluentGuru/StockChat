@@ -20,8 +20,8 @@ namespace Jobsity.StockChat.Application.Handlers
 
         public async Task<bool> Handle(CheckAuthorizationCommand request, CancellationToken cancellationToken)
         {
-            var now = dateTime.Now;
-            return await dataSource.AnyAsync<UserTokenEntity>(t => t.Token == request.Token && t.ExpirationDate > now);
+            var token = await dataSource.GetSingleAsync<UserTokenEntity>(t => t.Token == request.Token);
+            return token != null && token.ExpirationDate > dateTime.Now;
         }
     }
 }

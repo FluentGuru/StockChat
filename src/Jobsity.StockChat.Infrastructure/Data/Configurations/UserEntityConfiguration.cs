@@ -13,7 +13,7 @@ namespace Jobsity.StockChat.Infrastructure.Data.Configurations
         public void Configure(EntityTypeBuilder<UserEntity> builder)
         {
             builder.HasKey(t => t.Nickname);
-            builder.Property(t => t.Nickname).IsNickname();
+            builder.Property(t => t.Nickname).IsNickname().ValueGeneratedNever();
 
             //builder.HasPartitionKey(t => t.CreatedDate.Year);
 
@@ -24,6 +24,8 @@ namespace Jobsity.StockChat.Infrastructure.Data.Configurations
 
             builder.HasMany(t => t.Participations).WithOne(d => d.Participant).HasForeignKey(d => d.Nickname);
             builder.HasMany(t => t.Messages).WithOne(d => d.Sender).HasForeignKey(d => d.FromNickName);
+
+            builder.ToContainer("Users");
         }
     }
 }

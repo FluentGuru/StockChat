@@ -19,6 +19,7 @@ namespace Jobsity.StockChat.Infrastructure
             services.AddContext(
                 configuration.GetValue<string>("Endpoint"),
                 configuration.GetValue<string>("Subscription"));
+            services.AddSignalRCore();
             return services;
         }
 
@@ -26,6 +27,7 @@ namespace Jobsity.StockChat.Infrastructure
         {
             services.AddSingleton<IDateTime, MachineDateTime>();
             services.AddSingleton<IHasher, Sha1Hasher>();
+            services.AddSingleton<IChatNotifier, ChatHubNotifier>();
             services.AddTransient<IDataSource, EfUnitOfWork>();
             services.AddTransient<IPersistence, EfUnitOfWork>();
             services.AddTransient<IUnitOfWork, EfUnitOfWork>();
@@ -33,7 +35,8 @@ namespace Jobsity.StockChat.Infrastructure
 
         public static void AddContext(this IServiceCollection services, string endpoint, string subscription)
         {
-            services.AddDbContext<StockChatDbContext>(options => options.UseCosmos(endpoint, subscription, "StockChat"));
+            services.AddDbContext<StockChatDbContext>(options => 
+            options.UseCosmos(endpoint, subscription, "StockChat"));
         }
 
     }

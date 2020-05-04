@@ -12,13 +12,15 @@ namespace Jobsity.StockChat.Infrastructure.Data.Configurations
         public void Configure(EntityTypeBuilder<UserTokenEntity> builder)
         {
             builder.HasKey(t => t.Token);
-            builder.Property(t => t.Token).IsRequired();
+            builder.Property(t => t.Token).IsRequired().ValueGeneratedNever();
 
             builder.Property(t => t.Nickname).IsNickname();
             builder.Property(t => t.CreatedDate).IsRequired();
             builder.Property(t => t.ExpirationDate).IsRequired();
 
             builder.HasOne(t => t.User).WithMany(d => d.UserTokens).HasForeignKey(t => t.Nickname);
+
+            builder.ToContainer("UserTokens");
         }
     }
 }

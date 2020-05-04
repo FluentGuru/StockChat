@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Jobsity.StockChat.Application;
 using Jobsity.StockChat.Infrastructure;
+using Jobsity.StockChat.Infrastructure.Hubs;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -49,6 +50,7 @@ namespace Jobsity.StockChat.Api
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapHub<ChatHub>("/streams/stock");
             });
         }
     }

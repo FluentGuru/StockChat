@@ -1,5 +1,6 @@
 ﻿using Jobsity.StockChat.Application.Commands;
 using Jobsity.StockChat.Domain.Constants;
+using Jobsity.StockChat.Domain.Entities;
 using Jobsity.StockChat.Domain.Exceptions;
 using Jobsity.StockChat.Domain.Services;
 using Jobsity.StockChat.Domain.Types;
@@ -26,13 +27,14 @@ namespace Jobsity.StockChat.Application.Handlers
         {
             var user = await unitOfWork.GetUser(request.Nickname);
             var hash = hasher.Generate(request.Password, user.PasswordSalt);
-            if(user.PasswordSalt == hash)
+            if(user.PasswordHash == hash)
             {
                 user.PasswordSalt = hasher.GetSalt(UserAuthConstants.PasswordSaltLength);
+                user.PasswordHash = hasher.Generate(request.Password, user.PasswordSalt);
                 user.LastLoginDate = dateTime.Now;
                 await unitOfWork.UpdateAsync(user);
-                var token = new UserToken() { Token = hasher.Generate(user.LastLoginDate.ToString(), request.Nickname), CreatedDate = user.LastLoginDate, ExpirationDate = user.LastLoginDate.Add(request.TokenExpirationTime) };
-                await unitOfWork.AddAndSaveAsync(user);
+                var token = new UserTokenEntity() { Token = hasher.Generate(user.LastLoginDate.ToString(), request.Nickname), Nickname = request.Nickname, CreatedDate = user.LastLoginDate, ExpirationDate = user.LastLoginDate.Add(request.TokenExpirationTime) };
+                await unitOfWork.AddAndSaveAsync(token);
                 return new UserAuthentication() { User = user, Token = token.Token };
             }
 

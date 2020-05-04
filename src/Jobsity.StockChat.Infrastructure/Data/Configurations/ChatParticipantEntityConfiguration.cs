@@ -19,6 +19,8 @@ namespace Jobsity.StockChat.Infrastructure.Data.Configurations
 
             builder.HasOne(t => t.Chat).WithMany(d => d.Participants).HasForeignKey(t => t.Stock);
             builder.HasOne(t => t.Participant).WithMany(d => d.Participations).HasForeignKey(t => t.Nickname);
+
+            builder.ToContainer("ChatParticipants");
         }
     }
 }
